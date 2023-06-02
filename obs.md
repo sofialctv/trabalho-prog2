@@ -29,8 +29,7 @@ notaFinal = nota1 (Prova1) + nota2 (Trabalho) + nota3 (Maratona) + bonusExercíc
 ```python
 
 if notaFinal > 100: 
-    notalFinal == 100
-print notaFinal
+    notaFinal == 100
 ```
 
 ### Bônus é calculado por:
@@ -40,6 +39,14 @@ bonusExercícios|    1    |  3E
 bonusPresença  |    2    |  2P
 
 * bonusTrabalho é acresido diretamente na nota2
+* bonusPresença é sempre 0 ou 2
+
+```python
+
+if numFaltas == 0: 
+    notaFinal += bonusPresença
+```
+
 
 # PRINCIPAL OBJETIVO
 
@@ -47,5 +54,15 @@ bonusPresença  |    2    |  2P
 
 ## Critérios de ordenação da lista
 
-1. Semestre (do + recente pro + antigo)
-2. 
+1. Semestre (do mais recente para o mais antigo)
+2. Em caso de empate, pela nota final (da maior para a menor)
+3. Em caso de novo empate, em ordem alfabética do nome
+4. Caso ainda haja empate, em ordem crescente de matrícula
+
+* **Os caracteres são ordenados de acordo com suas posições na tabela UTF-8**
+
+# COMPARAÇÃO DE MATRÍCULAS
+O método de ordenação deve utilizar uma única função de comparação que **recebe duas matrículas m1 e m2**, além do dicionário de alunos, e retorna:
+
+* TRUE, caso matrícula 1 (m1) apareça ANTES da matrícula 2 (m2)
+* FALSE, caso contrário
