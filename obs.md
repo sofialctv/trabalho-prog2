@@ -46,4 +46,6 @@ bonusPresença  |    2    |  2P
 * Criar lista contendo APENAS os nº de matrícula dos alunos
 
 ## Critérios de ordenação da lista
-    1. 
+
+1. Semestre (do + recente pro + antigo)
+2. 
