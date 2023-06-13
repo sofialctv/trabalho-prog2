@@ -149,7 +149,8 @@ def main():
     else: 
        nota_final = soma_notas
 
-    f.write(f'{dic[matriculas[matricula]][1][0]}/{dic[matriculas[matricula]][1][0]} {dic[matriculas[matricula]][0]} - {nota_final} ({msg} = {soma_notas})\n')
+    f.write(f'{dic[matriculas[matricula]][1][0]}/{dic[matriculas[matricula]][1][1]} {dic[matriculas[matricula]][0]} - {nota_final} ({msg} = {soma_notas})\n')
+  f.close()
   
 
 if __name__ == '__main__':
