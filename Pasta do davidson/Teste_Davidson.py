@@ -1,4 +1,5 @@
 #Algoritmo de ordenacao mergesort
+
 def mSort(l,dic):
 	if len(l) > 1:
 		meio = len(l) // 2
@@ -6,9 +7,10 @@ def mSort(l,dic):
 		lDir = l[meio:]
 		
 		mSort(lEsq,dic)
-		mSort(lEsq,dic)
+		mSort(lDir,dic)
 		
-		return merge(l, dic, lEsq, lDir)
+		merge(l,dic, lEsq, lDir)
+                
 		
 def merge(l, dic, lEsq, lDir,):
   #Declaracao de var.
@@ -117,11 +119,9 @@ def main():
 
       for matricula in dic:
           matriculas.append(matricula)
-
-      for i in range (len(matriculas)):
-        print(matriculas[i], dic[matriculas[i]][1])
+      
+      mSort(matriculas, dic)
       print('----------------------------')
-      mSort(matriculas,dic)
       for i in range (len(matriculas)):
         print(matriculas[i], dic[matriculas[i]][1])
 
