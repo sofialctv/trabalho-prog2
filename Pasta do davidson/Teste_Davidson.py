@@ -123,8 +123,8 @@ def main():
       
       mSort(matriculas, dic)
       print('----------------------------')
-      for i in range (len(matriculas)):
-        print(matriculas[i], dic[matriculas[i]][1])
+      for i in range (len(matriculas)-1,-1,-1):
+        print(matriculas[i], dic[matriculas[i]][1], dic[matriculas[i]][0])
 
 if __name__ == '__main__':
    main()
