@@ -98,7 +98,8 @@ def merge(l, dic, lEsq, lDir,):
 
   while i < len(lEsq):
     l[k] = lEsq[i]
-    i += 1			
+    i += 1
+    k += 1			
 
   while j < len(lDir):
     l[k] = lDir[j]
