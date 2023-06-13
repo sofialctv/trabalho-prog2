@@ -50,6 +50,16 @@ def compara_Alunos(m1, m2, planilha):
     if m1 > m2: return True
     if m1 < m2: return False
 
+
+# ALGORITMO DE ORDENÇÃO
+'''
+
+Add mergeSort aqui, utilizando a função compara_Alunos
+
+'''
+
+
+
 # MAIN: Função principal - Abrindo o arquivo de entrada
 def main():
 
@@ -61,12 +71,14 @@ def main():
     for chave in planilha:                      # Lembrando que as chaves do dicionário são as matrículas de cada aluno
         lista_Matriculas.append(chave)
 
+   
     # ORDENAMatricula
 
 
 
     # Escrevendo o arquivo em formato txt
-
+    with open('saida.txt', 'w', encoding=' utf8') as arq:
+        for
 
 if __name__ == '__main__':
     main()
