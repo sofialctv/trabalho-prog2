@@ -123,14 +123,14 @@ def main():
       
   mSort(matriculas, dic)
 
-  f = open('saida.txt', 'w')
-  for matricula in matriculas:
+  f = open('saida.txt', 'w', encoding=' utf8')
+  for matricula in range(len(matriculas)-1,-1,-1):
 
     msg = ''
     nota_final = 0
     soma_notas = 0
 
-    _, _, notas, faltas = dic[matricula]
+    _, _, notas, faltas = dic[matriculas[matricula]]
 
     soma_notas += notas[0] + notas[1] + notas[2]
 
@@ -138,18 +138,18 @@ def main():
 
     if notas[3] > 0:
        soma_notas += notas[3]
-       msg += f'+{notas[3]}E'
+       msg += f' +{notas[3]}E'
 
     if faltas == 0:
       soma_notas += 2
-      msg += '+2P'
+      msg += ' +2P'
       
     if soma_notas > 100:
        nota_final = 100
     else: 
        nota_final = soma_notas
 
-    f.write(f'{dic[matricula][1][0]}/{dic[matricula][1][0]} {dic[matricula][0]} - {nota_final} ({msg}) = {soma_notas}\n')
+    f.write(f'{dic[matriculas[matricula]][1][0]}/{dic[matriculas[matricula]][1][0]} {dic[matriculas[matricula]][0]} - {nota_final} ({msg} = {soma_notas})\n')
   
 
 if __name__ == '__main__':
