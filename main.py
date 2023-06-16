@@ -1,4 +1,26 @@
+#                  Trabalho Prático | Programação II               #
+# Grupo: David de Assis, Davidson de Carvalho & Sofia de Alcantara #
+# Algoritmo de Ordenação Utilizado:             MergeSort          #
+
+
 import pickle
+
+# PARTE I do MergeSort - Dividindo a sequência ao meio. Ou seja, separando a lista de matrícula em listas menores.
+
+def mergeSort(lista, dicionario):
+        
+	if len(lista) > 1:
+                
+		meio = len(lista) // 2
+		lista_Esquerda = lista[: meio]
+		lista_Direita = lista[meio: ]
+    
+		mergeSort(lista_Esquerda, dicionario)
+		mergeSort(lista_Direita, dicionario)
+		
+		mergeAux(l,dicionario, lista_Esquerda, lista_Direita)
+
+
 
 # COMPARAÇÃO DOS ALUNOS
 def compara_Alunos(m1, m2, planilha):
