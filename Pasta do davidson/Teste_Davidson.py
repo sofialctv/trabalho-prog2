@@ -100,7 +100,7 @@ def merge(l, dic, lEsq, lDir,): #ORDENA
   while i < len(lEsq):
     l[k] = lEsq[i]
     i += 1
-    k += 1			
+    k += 1
 
   while j < len(lDir):
     l[k] = lDir[j]
@@ -112,8 +112,8 @@ def merge(l, dic, lEsq, lDir,): #ORDENA
 import pickle
 def main():
 
-  #arquiv = input('Escreva o diretório do arquivo:'
-  arquiv = 'C:\\Users\\Davidson\\Desktop\\Coisas aleatorias\\Programas Py\\trabalho-prog2\\entradas\\entrada10.bin'
+  arquiv = input('Escreva o diretório do arquivo:'
+  
   matriculas = []
   with open(arquiv,'rb') as file:
       
@@ -122,10 +122,37 @@ def main():
       for matricula in dic:
           matriculas.append(matricula)
       
-      mSort(matriculas, dic)
-      print('----------------------------')
-      for i in range (len(matriculas)-1,-1,-1):
-        print(matriculas[i], dic[matriculas[i]][1], dic[matriculas[i]][0])
+  mSort(matriculas, dic)
+
+  f = open('saida.txt', 'w', encoding=' utf8')
+  for matricula in range(len(matriculas)-1,-1,-1):
+
+    msg = ''
+    nota_final = 0
+    soma_notas = 0
+
+    _, _, notas, faltas = dic[matriculas[matricula]]
+
+    soma_notas += notas[0] + notas[1] + notas[2]
+
+    msg += f'{notas[0]}+{notas[1]}+{notas[2]}'
+
+    if notas[3] > 0:
+       soma_notas += notas[3]
+       msg += f' +{notas[3]}E'
+
+    if faltas == 0:
+      soma_notas += 2
+      msg += ' +2P'
+      
+    if soma_notas > 100:
+       nota_final = 100
+    else: 
+       nota_final = soma_notas
+
+    f.write(f'{dic[matriculas[matricula]][1][0]}/{dic[matriculas[matricula]][1][1]} {dic[matriculas[matricula]][0]} - {nota_final} ({msg} = {soma_notas})\n')
+  f.close()
+  
 
 if __name__ == '__main__':
    main()
