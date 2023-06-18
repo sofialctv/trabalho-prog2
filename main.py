@@ -5,9 +5,61 @@
 
 import pickle
 
-# PARTE I do MergeSort - Dividindo a sequência ao meio. Ou seja, separando a lista de matrícula em listas menores.
+def comparacao(m1, m2, dicionario):      
 
-def mergeSort(lista, dicionario):
+    nome_Aluno1, semestre_Aluno1, notas_Aluno1, faltas_Aluno1 = dicionario[m1]
+    nome_Aluno2, semestre_Aluno2, notas_Aluno2, faltas_Aluno2 = dicionario[m2]
+        
+    notaFinal_Aluno1 = 0
+    notaFinal_Aluno2 = 0
+    
+    ano1 = semestre_Aluno1[0]
+    ano2 = semestre_Aluno2[0]
+
+    periodo1 = semestre_Aluno1[1]
+    periodo2 = semestre_Aluno2[1]
+    
+    # Cálculo dos pontos extras das faltas + Garantindo que a nota nunca ultrapassará 100 pontos
+
+    notaFinal_Aluno1 = sum(notas_Aluno1)
+
+    if faltas_Aluno1 == 0:
+         notaFinal_Aluno1 += 2
+    
+    if notaFinal_Aluno1 > 100:
+         notaFinal_Aluno1 = 100
+
+    notaFinal_Aluno2 = sum(notas_Aluno2)
+
+    if faltas_Aluno2 == 0:
+         notaFinal_Aluno2 += 2
+    
+    if notaFinal_Aluno2 > 100:
+         notaFinal_Aluno2 = 100
+    
+    #  Testando o ano e período dos alunos
+    if ano1 < ano2: return True
+    if ano1 > ano2: return False
+    
+    if periodo1 < periodo2: return True
+    if periodo1 > periodo2: return False
+
+    # Testando a nota final
+    if notaFinal_Aluno1 < notaFinal_Aluno2: return True
+    if notaFinal_Aluno1 > notaFinal_Aluno2: return False
+
+    # Testando o nome
+    if nome_Aluno1 > nome_Aluno2: return True
+    if nome_Aluno1 < nome_Aluno2: return False
+
+    # Testando a matrícula
+    if m1 > m2: return True
+    if m1 < m2: return False
+
+
+# ALGORITMO DE ORDENÇÃO - Dividindo a sequência ao meio. Ou seja, separando a lista de matrícula em listas menores.
+
+def mSort(lista, dicionario):
         
 	if len(lista) > 1:
                 
@@ -15,92 +67,84 @@ def mergeSort(lista, dicionario):
 		lista_Esquerda = lista[: meio]
 		lista_Direita = lista[meio: ]
     
-		mergeSort(lista_Esquerda, dicionario)
-		mergeSort(lista_Direita, dicionario)
+		mSort(lista_Esquerda, dicionario)
+		mSort(lista_Direita, dicionario)
 		
-		mergeAux(l,dicionario, lista_Esquerda, lista_Direita)
+		merge(lista, dicionario, lista_Esquerda, lista_Direita)
 
+def merge(lista, dicionario, lista_Esquerda, lista_Direita):
+     
+    i = 0
+    j = 0
+    k = 0    
 
-
-# COMPARAÇÃO DOS ALUNOS
-def compara_Alunos(m1, m2, planilha):
-
-    nome_Aluno1, semestre_Aluno1, notas_Aluno1, faltas_Aluno1 = planilha[m1]
-    nome_Aluno2, semestre_Aluno2, notas_Aluno2, faltas_Aluno2 = planilha[m2]
-        
-    ano1 = semestre_Aluno1[0]
-    ano2 = semestre_Aluno2[0]
-
-    periodo1 = semestre_Aluno1[1]
-    periodo2 = semestre_Aluno2[1]
-
-
-    notas_Aluno1 = sum(notas_Aluno1)
-    notas_Aluno2 = sum(notas_Aluno2)    
+    while i < len(lista_Esquerda) and j < len(lista_Direita):
     
-    # Cálculo dos pontos extras das faltas + Garantindo que a nota nunca ultrapassará 100 pontos
+        m1 = lista_Esquerda[i]
+        m2 = lista_Direita[j]
+    
+        if comparacao(m1, m2, dicionario): 
+            lista[k] = lista_Esquerda[i]
+            i += 1
 
-    if faltas_Aluno1 == 0 and notas_Aluno1 <= 98: 
-        notas_Aluno1 += 2
-    elif faltas_Aluno1 == 0 and notas_Aluno1 == 99:
-        notas_Aluno1 += 1
+        else:
+            lista[k] = lista_Direita[j]
+            j += 1
+        
+        k += 1
 
-    if faltas_Aluno2 == 0 and notas_Aluno2 <= 98: 
-        notas_Aluno2 += 2
-    elif faltas_Aluno2 == 0 and notas_Aluno2 == 99:
-        notas_Aluno2 += 1
+    while i < len(lista_Esquerda):
+        lista[k] = lista_Esquerda[i]
+        i += 1
+        k += 1
 
-# COMPARAÇÕES - Já escritas seguindo a ordem de desempate
-
-    # Semestres
-    if ano1 > ano2: return True
-    if ano1 < ano2: return False
-
-    if ano1 == ano2:
-        if periodo1 > periodo2: return True
-        if periodo1 < periodo2: return False
-
-    # Nota final
-    if notas_Aluno1 > notas_Aluno2: return True
-    if notas_Aluno1 < notas_Aluno2: return False
-
-    # Nome
-    if nome_Aluno1 > nome_Aluno2: return True
-    if nome_Aluno1 < nome_Aluno2: return False
-
-    # Matrícula
-    if m1 > m2: return True
-    if m1 < m2: return False
-
-
-# ALGORITMO DE ORDENÇÃO
-'''
-
-Add mergeSort aqui, utilizando a função compara_Alunos
-
-'''
-
-
+    while j < len(lista_Direita):
+        lista[k] = lista_Direita[j]
+        j += 1
+        k += 1
 
 # MAIN: Função principal - Abrindo o arquivo de entrada
 def main():
 
-    lista_Matriculas = []                       # Criando lista apenas com as matrículas dos alunos, que são as chaves do dicionário (planilha)
+    arquivo = input('Escreva o diretório do arquivo: ')
+    lista_Matriculas = []                       
     
-    with open('entrada.bin', 'rb') as arq:      # 'arq' é a variável que será usada p/ se referir ao objeto de arquivo
-        planilha = pickle.load(arq)             # Lendo o dicionário do arquivo binário com uma único comando
+    with open(arquivo, 'rb') as file:
 
-    for chave in planilha:                      # Lembrando que as chaves do dicionário são as matrículas de cada aluno
+        dicionario = pickle.load(file)            
+
+    for chave in dicionario:                      
         lista_Matriculas.append(chave)
 
-   
-    # ORDENAMatricula
-
-
-
-    # Escrevendo o arquivo em formato txt
+    mSort(lista_Matriculas, dicionario)
+ 
     with open('saida.txt', 'w', encoding=' utf8') as arq:
-        for
+        for chave in range(len(lista_Matriculas)-1, -1, -1):
+             
+            msg = ''
+            nota_final = 0
+            soma_notas = 0
+        
+            _, _, notas, faltas = dicionario[lista_Matriculas[chave]]
+
+            soma_notas += notas[0] + notas[1] + notas[2]
+
+            msg += f'{notas[0]}+{notas[1]}+{notas[2]}'
+
+            if notas[3] > 0:
+                soma_notas += notas[3]
+                msg += f' +{notas[3]}E'
+
+            if faltas == 0:
+                soma_notas += 2
+                msg += ' +2P'
+            
+            if soma_notas > 100:
+                nota_final = 100
+            else: 
+                nota_final = soma_notas
+
+            arq.write(f'{dicionario[lista_Matriculas[chave]][1][0]}/{dicionario[lista_Matriculas[chave]][1][1]} {lista_Matriculas[chave]} {dicionario[lista_Matriculas[chave]][0]} - {nota_final} ({msg} = {soma_notas})\n')
 
 if __name__ == '__main__':
     main()
