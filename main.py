@@ -106,10 +106,9 @@ def merge(lista, dicionario, lista_Esquerda, lista_Direita):
 # MAIN: Função principal - Abrindo o arquivo de entrada
 def main():
 
-    arquivo = input('Escreva o diretório do arquivo: ')
     lista_Matriculas = []                       
     
-    with open(arquivo, 'rb') as file:
+    with open('entrada.bin', 'rb') as file:
 
         dicionario = pickle.load(file)            
 
